@@ -27,7 +27,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	renProperties.stencil = false;
 	renProperties.multiSamples.multiSamples = 0;
 	renProperties.multiSamples.multiSamplesQuality = 0;
-	renderer->configureRenderer(renProperties);
+	//renderer->configureRenderer(renProperties);
+	renderer->configureRenderer(window, 1, 800, 600, false);
+
+	
 	MSG msg = {};
 	while (true)
 	{
@@ -38,7 +41,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			if (msg.message == WM_QUIT)
 				break;
 		}
+		renderer->setViewport(0, 0, 300, 300, 0.0f, 1.0f);
 		renderer->clear(1.0f, 0.5f, 0.0f, 1.0f);
+		renderer->begin();
+		renderer->end();
+		renderer->setViewport(300, 0, 300, 300, 0.0f, 1.0f);
+		renderer->clear(1.0f, 1.0f, 0.0f, 0.0f);
 		renderer->begin();
 		renderer->end();
 		renderer->present();
