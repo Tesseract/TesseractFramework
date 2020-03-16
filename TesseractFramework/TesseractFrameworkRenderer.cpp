@@ -53,6 +53,10 @@ namespace TesseractFramework
 
 	}
 
+	void TESSERACTFRAMEWORK_API TesseractFrameworkRenderer::setViewport(unsigned int xLeft, unsigned int yTop, unsigned int xWidth, unsigned int yHeight,float minZ, float maxZ)
+	{
+
+	}
 	void TESSERACTFRAMEWORK_API TesseractFrameworkRenderer::release()
 	{
 		while (!m_pInterfaces.empty())

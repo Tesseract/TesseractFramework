@@ -178,6 +178,17 @@ namespace TesseractFramework
 		unsigned int backbufferHeight,
 		bool fullscreen)
 	{
+		RendererProperties renProperties = {};
+		renProperties.backbufferCount = backbufferCount;
+		renProperties.backbufferWinWidth = backbufferWidth;
+		renProperties.backbufferWinHeight = backbufferHeight;
+		renProperties.fullScreen = fullscreen;
+		renProperties.winHandle = hWnd;
+		renProperties.vSync = {};
+		renProperties.stencil = false;
+		renProperties.multiSamples.multiSamples = 0;
+		renProperties.multiSamples.multiSamplesQuality = 0;
+		this->configureRenderer(renProperties);
 		return TesseractFrameworkRenderer::configureRenderer(hWnd, backbufferCount, backbufferWidth, backbufferHeight, fullscreen);
 	}
 
@@ -194,6 +205,19 @@ namespace TesseractFramework
 		color.b = m_pColor[3];
 		m_pD3DDevice9->Clear(0, 0, D3DCLEAR_TARGET, color, 1.0f, 1);
 	}
+
+	void TESSERACTFRAMEWORK_API TesseractFrameworkRendererD3D9::setViewport(unsigned int xLeft, unsigned int yTop, unsigned int xWidth, unsigned int yHeight,float minZ, float maxZ)
+	{
+		D3DVIEWPORT9 viewport;
+		viewport.X = xLeft;
+		viewport.Y = yTop;
+		viewport.Width = xWidth;
+		viewport.Height = yHeight;
+		viewport.MinZ = minZ;
+		viewport.MaxZ = maxZ;
+		m_pD3DDevice9->SetViewport(&viewport);
+	}
+
 	void TESSERACTFRAMEWORK_API TesseractFrameworkRendererD3D9::begin()
 	{
 		m_pD3DDevice9->BeginScene();
@@ -206,5 +230,15 @@ namespace TesseractFramework
 	void TESSERACTFRAMEWORK_API TesseractFrameworkRendererD3D9::present()
 	{
 		m_pD3DDevice9->Present(0, 0, 0, 0);
+	}
+
+	TESSERACTFRAMEWORK_API IDirect3D9* TesseractFrameworkRendererD3D9::getD3D9() const
+	{
+		return this->m_pD3D9;
+	}
+
+	TESSERACTFRAMEWORK_API IDirect3DDevice9* TesseractFrameworkRendererD3D9::getD3DDevice9() const
+	{
+		return this->m_pD3DDevice9;
 	}
 }

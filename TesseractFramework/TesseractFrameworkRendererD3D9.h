@@ -25,6 +25,8 @@ namespace TesseractFramework
 			unsigned int backbufferHeight,
 			bool fullscreen);
 
+		void TESSERACTFRAMEWORK_API setViewport(unsigned int xLeft, unsigned int yTop, unsigned int xWidth, unsigned int yHeight,float minZ, float maxZ);
+
 		void TESSERACTFRAMEWORK_API clear(float alpha, float red, float green, float blue);
 
 		void TESSERACTFRAMEWORK_API begin();
@@ -32,5 +34,9 @@ namespace TesseractFramework
 		void TESSERACTFRAMEWORK_API end();
 
 		void TESSERACTFRAMEWORK_API present();
+
+		TESSERACTFRAMEWORK_API IDirect3D9* getD3D9() const;
+
+		TESSERACTFRAMEWORK_API IDirect3DDevice9* getD3DDevice9() const;
 	};
 }

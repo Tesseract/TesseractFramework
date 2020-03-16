@@ -48,6 +48,13 @@ namespace TesseractFramework
 			unsigned int backbufferHeight,
 			bool fullscreen) = 0;
 
+		virtual void setViewport(unsigned int xLeft, 
+			unsigned int yTop, 
+			unsigned int xWidth, 
+			unsigned int yHeight,
+			float minZ,
+			float maxZ) = 0;
+
 		virtual void clear(float alpha, float red, float green, float blue) = 0;
 
 		virtual void begin() = 0;
